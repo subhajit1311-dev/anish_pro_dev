@@ -123,11 +123,22 @@ function StartupApplication() {
     
     setIsSubmitting(true)
     try {
-      await StartupAPI.create(formData)
+      const payload = {
+        name: formData.startup_name,
+        founder_name: formData.founder_name,
+        email: formData.email,
+        phone_number: formData.phone_number,
+        startup_type: formData.startup_type,
+        description: formData.description,
+        website: formData.website,
+        address: formData.address,
+        tags: formData.tags,
+      }
+      await StartupAPI.create(payload)
       alert('Startup application submitted!')
       navigate('/StartupOwner/dashboard')
     } catch (error) {
-      alert(error.message || 'Error submitting application. Please try again.')
+      alert(error.message || 'Create startup failed')
     } finally {
       setIsSubmitting(false)
     }

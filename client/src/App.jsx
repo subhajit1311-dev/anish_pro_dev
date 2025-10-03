@@ -9,6 +9,10 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import PrivateRoute from './components/PrivateRoute'
 import { AuthProvider } from './context/AuthContext'
+import UserProfile from './components/UserProfile'
+import UserDashboard from './components/UserDashboard'
+import UserProfileEdit from './components/UserProfileEdit'
+import UserProfileView from './components/UserProfileView'
 
 function App() {
   return (
@@ -21,6 +25,10 @@ function App() {
           <Route path="/StartupOwner/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
           <Route path="/StartupOwner/complete-profile" element={<PrivateRoute><CompleteProfile /></PrivateRoute>} />
           <Route path="/StartupOwner/startup-application" element={<PrivateRoute><StartupApplication /></PrivateRoute>} />
+          <Route path="/user/profile" element={<PrivateRoute><UserProfile /></PrivateRoute>} />
+          <Route path="/user/dashboard" element={<PrivateRoute><UserDashboard /></PrivateRoute>} />
+          <Route path="/user/profile/view" element={<PrivateRoute><UserProfileView /></PrivateRoute>} />
+          <Route path="/user/profile/edit" element={<PrivateRoute><UserProfileEdit /></PrivateRoute>} />
         </Routes>
       </Router>
     </AuthProvider>

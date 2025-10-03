@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 import { 
   FaLeaf, 
   FaUserMd, 
@@ -16,6 +17,17 @@ import {
 } from 'react-icons/fa'
 
 function LandingPage() {
+  const navigate = useNavigate()
+  const { token, user } = useAuth()
+
+  const handleStartRegistration = () => {
+    if (token && user?.role === 'startup_owner') {
+      navigate('/StartupOwner/dashboard')
+    } else {
+      navigate('/login')
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-ayush-50 to-green-100">
       {/* Navigation */}
@@ -32,9 +44,10 @@ function LandingPage() {
               <a href="#services" className="text-gray-700 hover:text-ayush-600 transition-colors">Services</a>
               <a href="#contact" className="text-gray-700 hover:text-ayush-600 transition-colors">Contact</a>
             </div>
-            <Link to="/StartupOwner/dashboard" className="btn-primary">
-              Dashboard
-            </Link>
+            <div className="flex items-center space-x-3">
+              <Link to="/signup" className="px-4 py-2 border border-ayush-600 text-ayush-600 rounded hover:bg-ayush-50 transition-colors">Sign Up</Link>
+              <Link to="/login" className="px-4 py-2 border border-ayush-600 text-ayush-600 rounded hover:bg-ayush-50 transition-colors">Login</Link>
+            </div>
           </div>
         </div>
       </nav>
@@ -62,9 +75,9 @@ function LandingPage() {
               Register your innovative healthcare startup and join India's traditional medicine revolution.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/StartupOwner/dashboard" className="btn-primary text-lg px-8 py-4 inline-block">
+              <button onClick={handleStartRegistration} className="btn-primary text-lg px-8 py-4 inline-block">
                 Start Registration <FaArrowRight className="inline ml-2" />
-              </Link>
+              </button>
               <button className="btn-secondary text-lg px-8 py-4">
                 Learn More
               </button>
@@ -304,9 +317,9 @@ function LandingPage() {
           <p className="text-xl text-ayush-100 mb-8 max-w-2xl mx-auto">
             Join thousands of entrepreneurs building the future of traditional medicine in India.
           </p>
-          <Link to="/StartupOwner/dashboard" className="bg-white text-ayush-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg text-lg transition-colors duration-200 inline-block">
+          <button onClick={handleStartRegistration} className="bg-white text-ayush-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg text-lg transition-colors duration-200 inline-block">
             Register Your Startup Now
-          </Link>
+          </button>
         </div>
       </section>
 
@@ -330,7 +343,8 @@ function LandingPage() {
                 <li><a href="#home" className="hover:text-white transition-colors">Home</a></li>
                 <li><a href="#about" className="hover:text-white transition-colors">About</a></li>
                 <li><a href="#services" className="hover:text-white transition-colors">Services</a></li>
-                <li><Link to="/StartupOwner/dashboard" className="hover:text-white transition-colors">Dashboard</Link></li>
+                <li><Link to="/login" className="hover:text-white transition-colors">Login</Link></li>
+                <li><Link to="/signup" className="hover:text-white transition-colors">Sign Up</Link></li>
               </ul>
             </div>
             
